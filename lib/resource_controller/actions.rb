@@ -1,12 +1,12 @@
 module ResourceController
   module Actions
-    
+
     def index
       load_collection
       before :index
       response_for :index
     end
-    
+
     def show
       load_object
       before :show
@@ -70,6 +70,6 @@ module ResourceController
         response_for :destroy_fails
       end
     end
-    
+
   end
 end

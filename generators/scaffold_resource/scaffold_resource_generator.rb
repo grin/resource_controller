@@ -25,14 +25,14 @@ class ScaffoldResourceGenerator < Rails::Generator::NamedBase
     end
 
     @generator_default_file_extension = (defined? Haml )? "haml" : "erb"
-    
+
     # we want to call erb templates .rhtml or .haml if this is rails 1
     if RAILS_GEM_VERSION.to_i == 1
       @default_file_extension = @generator_default_file_extension == 'erb' ? 'rhtml' : @generator_default_file_extension
     else
       @default_file_extension = "html.#{@generator_default_file_extension}"
     end
-    
+
     @controller_name = @name.pluralize
 
     base_name, @controller_class_path, @controller_file_path, @controller_class_nesting, @controller_class_nesting_depth = extract_modules(@controller_name)
@@ -67,7 +67,7 @@ class ScaffoldResourceGenerator < Rails::Generator::NamedBase
         m.directory(File.join('test/functional', controller_class_path))
         m.directory(File.join('test/unit', class_path))
       end
-      
+
       scaffold_views.each do |action|
         m.template(
           "view_#{action}.#{generator_default_file_extension}",
@@ -104,13 +104,13 @@ class ScaffoldResourceGenerator < Rails::Generator::NamedBase
 
       unless options[:skip_migration]
         migration_template = RAILS_GEM_VERSION.to_i == 1 ? 'old_migration.rb' : 'migration.rb'
-        
+
         m.migration_template(
-          migration_template, 'db/migrate', 
+          migration_template, 'db/migrate',
           :assigns => {
             :migration_name => "Create#{class_name.pluralize.gsub(/::/, '')}",
             :attributes     => attributes
-          }, 
+          },
           :migration_file_name => "create_#{file_path.gsub(/\//, '_').pluralize}"
         )
       end
@@ -123,7 +123,7 @@ class ScaffoldResourceGenerator < Rails::Generator::NamedBase
   def has_rspec?
     options[:rspec] || (File.exist?('spec') && File.directory?('spec'))
   end
-  
+
   protected
     # Override with your own usage banner.
     def banner
@@ -133,12 +133,12 @@ class ScaffoldResourceGenerator < Rails::Generator::NamedBase
     def rspec_views
       %w[ index show new edit ]
     end
-    
+
     def scaffold_views
       rspec_views + %w[ _form ]
     end
 
-    def model_name 
+    def model_name
       class_name.demodulize
     end
 
@@ -164,7 +164,7 @@ module Rails
           when :boolean                     then "false"
           else
             ""
-        end      
+        end
       end
 
       def input_type
@@ -172,7 +172,7 @@ module Rails
           when :text                        then "textarea"
           else
             "input"
-        end      
+        end
       end
     end
   end

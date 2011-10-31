@@ -13,7 +13,7 @@ class ImagesControllerTest < Test::Unit::TestCase
   end
 
   context "with user as parent" do
-    
+
     context "on post to :create" do
       setup do
         post :create, :user_id => 1, :photo => {}
@@ -26,9 +26,9 @@ class ImagesControllerTest < Test::Unit::TestCase
         assert users(:one), assigns(:image).user
       end
     end
-    
-  end  
-  
+
+  end
+
   should "not respond to show" do
     assert_raise(ActionController::UnknownAction) do
       get :show

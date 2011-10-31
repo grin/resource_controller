@@ -18,7 +18,7 @@ spec = Gem::Specification.new do |s|
 
   s.files                 = %w(README.rdoc LICENSE init.rb Rakefile) +
                             Dir.glob("{lib,test,generators,rails}/**/*")
-  
+
   s.require_path          = "lib"
 end
 
@@ -48,18 +48,18 @@ namespace :gem do
     sh "rubyforge add_release giraffesoft resource_controller #{ResourceController::VERSION::STRING} pkg/#{spec.full_name}.gem"
     sh "rubyforge add_file    giraffesoft resource_controller #{ResourceController::VERSION::STRING} pkg/#{spec.full_name}.gem"
   end
-  
+
   desc "Update the gemspec for GitHub's gem server"
   task :github do
     File.open("resource_controller.gemspec", 'w'){|f| f.puts YAML::dump(spec) }
     puts "gemspec generated here: resource_controller.gemspec"
   end
-  
+
   desc "Build and install the gem locally."
   task :install => [:clobber, :package] do
     sh "sudo gem install pkg/#{spec.full_name}.gem"
   end
-  
+
   desc "Remove the gem."
   task :uninstall => :clean do
     sh "sudo gem uninstall -v #{ResourceController::VERSION::STRING} -x #{ResourceController::NAME}"

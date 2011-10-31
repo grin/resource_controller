@@ -2,17 +2,17 @@ require 'test/unit/ui/console/testrunner'
 
 # Completely stolen from redgreen gem
 #
-# Adds colored output to your tests.  Specify <tt>color: true</tt> in 
+# Adds colored output to your tests.  Specify <tt>color: true</tt> in
 # your <tt>~/.shoulda.conf</tt> file to enable.
 #
-# *Bug*: for some reason, this adds another line of output to the end of 
-# every rake task, as though there was another (empty) set of tests.  
+# *Bug*: for some reason, this adds another line of output to the end of
+# every rake task, as though there was another (empty) set of tests.
 # A fix would be most welcome.
 #
-module ThoughtBot::Shoulda::Color 
+module ThoughtBot::Shoulda::Color
   COLORS = { :clear => 0, :red => 31, :green => 32, :yellow => 33 } # :nodoc:
   def self.method_missing(color_name, *args)  # :nodoc:
-    color(color_name) + args.first + color(:clear) 
+    color(color_name) + args.first + color(:clear)
   end
   def self.color(color) # :nodoc:
     "\e[#{COLORS[color.to_sym]}m"
@@ -34,7 +34,7 @@ module Test # :nodoc:
       alias :old_initialize :initialize
       def initialize(standalone)
         old_initialize(standalone)
-        @runner = proc do |r| 
+        @runner = proc do |r|
           Test::Unit::UI::Console::RedGreenTestRunner
         end
       end
@@ -67,7 +67,7 @@ module Test # :nodoc:
             when 'E' then ThoughtBot::Shoulda::Color.yellow("E")
             else something
             end
-            @io.write(something) 
+            @io.write(something)
             @io.flush
           end
         end

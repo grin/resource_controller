@@ -9,11 +9,11 @@ class Helpers::InternalTest < Test::Unit::TestCase
 
     @object = Post.new
     Post.stubs(:find).with("1").returns(@object)
-    
+
     @collection = mock()
     Post.stubs(:find).with(:all).returns(@collection)
   end
-  
+
   context "response_for" do
     setup do
       @options = ResourceController::ActionOptions.new
@@ -22,17 +22,17 @@ class Helpers::InternalTest < Test::Unit::TestCase
       @controller.stubs(:options_for).with(:create).returns( @options )
     end
 
-    should "yield a wants object to the response block" do      
+    should "yield a wants object to the response block" do
       @controller.send :response_for, :create
     end
   end
-  
+
   context "after" do
     setup do
       @options = ResourceController::FailableActionOptions.new
       @options.success.after { }
       @controller.stubs(:options_for).with(:create).returns( @options )
-      @nil_options = ResourceController::FailableActionOptions.new      
+      @nil_options = ResourceController::FailableActionOptions.new
       @controller.stubs(:options_for).with(:non_existent).returns(@nil_options)
     end
 
@@ -46,19 +46,19 @@ class Helpers::InternalTest < Test::Unit::TestCase
       end
     end
   end
-  
+
   context "before" do
     setup do
       PostsController.stubs(:non_existent).returns ResourceController::ActionOptions.new
     end
-    
+
     should "not choke if there is no block" do
       assert_nothing_raised do
         @controller.send :before, :non_existent
       end
     end
   end
-  
+
   context "get options for action" do
     setup do
       @create = ResourceController::FailableActionOptions.new
@@ -68,30 +68,30 @@ class Helpers::InternalTest < Test::Unit::TestCase
     should "get correct object for failure action" do
       assert_equal @create.fails, @controller.send(:options_for, :create_fails)
     end
-    
+
     should "get correct object for successful action" do
       assert_equal @create.success, @controller.send(:options_for, :create)
     end
-    
+
     should "get correct object for non-failable action" do
       @index = ResourceController::ActionOptions.new
       PostsController.stubs(:index).returns @index
       assert_equal @index, @controller.send(:options_for, :index)
     end
-    
+
     should "understand new_action to mean new" do
       @new_action = ResourceController::ActionOptions.new
       PostsController.stubs(:new_action).returns @new_action
       assert_equal @new_action, @controller.send(:options_for, :new_action)
     end
   end
-  
+
   context "flash now helper" do
     setup do
       klass = Class.new do
         include ResourceController::Helpers::Internal
       end
-      
+
       @c = klass.new
       @c.stubs(:options_for).returns(stub(:flash_now => 'something'))
       flash_now = mock()

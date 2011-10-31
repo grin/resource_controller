@@ -19,10 +19,10 @@ class SomethingsControllerTest < Test::Unit::TestCase
       end
     end
   end
-  
+
   should_be_restful do |resource|
     resource.formats = [:html]
-    
+
     resource.actions = [:index, :show]
   end
 end

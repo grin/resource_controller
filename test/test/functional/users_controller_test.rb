@@ -16,9 +16,9 @@ class UsersControllerTest < Test::Unit::TestCase
     resource.formats = [:html]
     resource.klass   = Account
     resource.object  = :dude
-    
+
     resource.create.redirect = 'dude_url(@dude)'
     resource.update.redirect = 'dude_url(@dude)'
     resource.destroy.redirect = 'dudes_url'
-  end  
+  end
 end

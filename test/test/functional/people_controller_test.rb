@@ -16,12 +16,12 @@ class PeopleControllerTest < Test::Unit::TestCase
     resource.formats = [:html]
     resource.klass   = Account
     resource.object  = :person
-    
+
     resource.create.redirect = 'person_url(@person)'
     resource.update.redirect = 'person_url(@person)'
     resource.destroy.redirect = 'people_url'
   end
-  
+
   context "before create" do
     setup do
       post :create, :person => {}

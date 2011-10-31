@@ -11,7 +11,7 @@ class TagsControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
     @tag        = Tag.find 1
   end
-  
+
   context "with photo as parent" do
     context "get to :index" do
       setup do
@@ -21,12 +21,12 @@ class TagsControllerTest < Test::Unit::TestCase
       should_assign_to :products
       should_render_template "index"
       should_respond_with :success
-      
+
       should "respond with html" do
         assert_equal 'text/html', @response.content_type
       end
     end
-    
+
     context "xhr to :index" do
       setup do
         xhr :get, :index, :photo_id => 1
@@ -39,7 +39,7 @@ class TagsControllerTest < Test::Unit::TestCase
         assert_equal 'text/javascript', @response.content_type
       end
     end
-    
+
     context "post to create" do
       setup do
         post :create, :photo_id => 1, :tag => {:name => "Hello!"}
@@ -50,12 +50,12 @@ class TagsControllerTest < Test::Unit::TestCase
       end
     end
   end
-  
+
   context "without photo as parent" do
     should_be_restful do |resource|
       resource.formats = [:html]
     end
-    
+
     should "render text for a missing object" do
       get :show, :id => 50000
       assert @response.body.match(/not found/i), @response.body
