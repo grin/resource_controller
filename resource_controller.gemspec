@@ -1,16 +1,16 @@
---- !ruby/object:Gem::Specification 
+--- !ruby/object:Gem::Specification
 name: resource_controller
-version: !ruby/object:Gem::Version 
+version: !ruby/object:Gem::Version
   version: 0.5.3
 platform: ruby
-authors: 
+authors:
 - James Golick
-autorequire: 
+autorequire:
 bindir: bin
 cert_chain: []
 
 date: 2008-09-22 00:00:00 -04:00
-default_executable: 
+default_executable:
 dependencies: []
 
 description: Rails RESTful controller abstraction plugin.
@@ -21,7 +21,7 @@ extensions: []
 
 extra_rdoc_files: []
 
-files: 
+files:
 - README.rdoc
 - LICENSE
 - init.rb
@@ -316,28 +316,28 @@ files:
 - rails/init.rb
 has_rdoc: true
 homepage: http://jamesgolick.com/resource_controller
-post_install_message: 
+post_install_message:
 rdoc_options: []
 
-require_paths: 
+require_paths:
 - lib
-required_ruby_version: !ruby/object:Gem::Requirement 
-  requirements: 
+required_ruby_version: !ruby/object:Gem::Requirement
+  requirements:
   - - ">="
-    - !ruby/object:Gem::Version 
+    - !ruby/object:Gem::Version
       version: 1.8.5
-  version: 
-required_rubygems_version: !ruby/object:Gem::Requirement 
-  requirements: 
+  version:
+required_rubygems_version: !ruby/object:Gem::Requirement
+  requirements:
   - - ">="
-    - !ruby/object:Gem::Version 
+    - !ruby/object:Gem::Version
       version: "0"
-  version: 
+  version:
 requirements: []
 
 rubyforge_project: giraffesoft
 rubygems_version: 1.2.0
-signing_key: 
+signing_key:
 specification_version: 2
 summary: resource_controller makes RESTful controllers easier, more maintainable, and super readable. With the RESTful controller pattern hidden away, you can focus on what makes your controller special.
 test_files: []

@@ -2,25 +2,25 @@ module Urligence
   def smart_url(*objects)
     urligence(*objects.push(:url))
   end
-  
+
   def smart_path(*objects)
     urligence(*objects.push(:path))
   end
-  
+
   def hash_for_smart_url(*objects)
     urligence(*objects.unshift(:hash_for).push(:url).push({:type => :hash}))
   end
-  
+
   def hash_for_smart_path(*objects)
     urligence(*objects.unshift(:hash_for).push(:path).push({:type => :hash}))
   end
-  
+
   def urligence(*objects)
     config = {}
     config.merge!(objects.pop) if objects.last.is_a?(Hash)
-    
+
     objects.reject! { |object| object.nil? }
-    
+
     url_fragments = objects.collect do |obj|
       if obj.is_a? Symbol
         obj
@@ -30,7 +30,7 @@ module Urligence
         obj.class.name.underscore.to_sym
       end
     end
-    
+
     unless config[:type] == :hash
       send url_fragments.join("_"), *objects.flatten.select { |obj| !obj.is_a? Symbol }
     else
@@ -43,7 +43,7 @@ module Urligence
           params.merge!((obj.is_a? Array) ? {:id => obj[1].to_param} : {:id => obj.to_param})
         end
       end
-      
+
       send url_fragments.join("_"), params
     end
   end

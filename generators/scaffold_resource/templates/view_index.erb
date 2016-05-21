@@ -10,7 +10,7 @@
     <tr>
     <%- for attribute in attributes -%>
       <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
-    <%- end -%>    
+    <%- end -%>
       <td><%%=link_to 'Show', object_url(<%= singular_name %>) %></td>
       <td><%%=link_to 'Edit', edit_object_url(<%= singular_name %>) %></td>
       <td><%%=link_to 'Destroy', object_url(<%= singular_name %>), :confirm => 'Are you sure?', :method => :delete %></td>

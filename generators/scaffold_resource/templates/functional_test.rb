@@ -23,12 +23,12 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     get :new
     assert_response :success
   end
-  
+
   def test_should_create_<%= file_name %>
     old_count = <%= class_name %>.count
     post :create, :<%= file_name %> => { }
     assert_equal old_count+1, <%= class_name %>.count
-    
+
     assert_redirected_to <%= file_name %>_path(assigns(:<%= file_name %>))
   end
 
@@ -41,17 +41,17 @@ class <%= controller_class_name %>ControllerTest < Test::Unit::TestCase
     get :edit, :id => 1
     assert_response :success
   end
-  
+
   def test_should_update_<%= file_name %>
     put :update, :id => 1, :<%= file_name %> => { }
     assert_redirected_to <%= file_name %>_path(assigns(:<%= file_name %>))
   end
-  
+
   def test_should_destroy_<%= file_name %>
     old_count = <%= class_name %>.count
     delete :destroy, :id => 1
     assert_equal old_count-1, <%= class_name %>.count
-    
+
     assert_redirected_to <%= table_name %>_path
   end
 end

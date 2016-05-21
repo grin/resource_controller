@@ -11,7 +11,7 @@ class Cms::PhotosControllerTest < Test::Unit::TestCase
     @response   = ActionController::TestResponse.new
     @photo      = Photo.find 1
   end
-  
+
   context "with personnel as parent" do
     context "on get to :index" do
       setup do
@@ -26,7 +26,7 @@ class Cms::PhotosControllerTest < Test::Unit::TestCase
         assert assigns(:photos).all? { |photo| photo.personnel.id == 1 }
       end
     end
-    
+
     context "on post to :create" do
       setup do
         post :create, :personnel_id => 1, :photo => {}

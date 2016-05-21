@@ -6,22 +6,22 @@ class AccessorsTest < Test::Unit::TestCase
       extend ResourceController::Accessors
     end
   end
-  
+
   context "scoping reader" do
     setup do
       PostsController.class_eval do
         class_scoping_reader :create, ResourceController::ActionOptions.new
       end
     end
-  
+
     should "access create as usual" do
       PostsController.class_eval do
         create.flash "asdf"
       end
-    
+
       assert_equal "asdf", PostsController.create.flash
     end
-  
+
     should "scope to create object in a block" do
       PostsController.class_eval do
         create do
@@ -29,16 +29,16 @@ class AccessorsTest < Test::Unit::TestCase
         end
       end
 
-      assert_equal "asdf", PostsController.create.flash 
+      assert_equal "asdf", PostsController.create.flash
     end
   end
-  
+
   context "reader/writer method" do
     setup do
       PostsController.class_eval do
         reader_writer :flash
       end
-      
+
       @controller = PostsController.new
     end
 
@@ -47,16 +47,16 @@ class AccessorsTest < Test::Unit::TestCase
       assert_equal "something", @controller.flash
     end
   end
-  
+
   context "class reader/writer method" do
     setup do
       PostsController.class_eval do
         class_reader_writer :flash
       end
-      
+
       @controller = PostsController.new
     end
-    
+
     should "initialize var" do
       assert_nil PostsController.flash
       assert_nil @controller.flash
@@ -67,7 +67,7 @@ class AccessorsTest < Test::Unit::TestCase
       assert_equal "something", PostsController.flash
     end
   end
-  
+
   context "block accessor" do
     setup do
       PostsController.class_eval do
@@ -80,7 +80,7 @@ class AccessorsTest < Test::Unit::TestCase
       @controller.something {}
       assert @controller.something.first
     end
-    
+
     should "store symbols as well" do
       @controller.something(:method, :method_two) {}
       assert_equal :method,     @controller.something[0]
@@ -88,13 +88,13 @@ class AccessorsTest < Test::Unit::TestCase
       assert @controller.something[2].is_a?(Proc)
     end
   end
-  
+
   context "reader writer" do
     setup do
       PostsController.class_eval do
         reader_writer :rw
       end
-      
+
       @controller = PostsController.new
     end
 
@@ -102,9 +102,9 @@ class AccessorsTest < Test::Unit::TestCase
       @controller.rw do
         "asdf"
       end
-      
+
       assert @controller.rw.is_a?(Proc), @controller.rw
     end
   end
-  
+
 end

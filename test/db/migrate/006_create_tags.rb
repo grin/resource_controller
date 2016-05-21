@@ -3,7 +3,7 @@ class CreateTags < ActiveRecord::Migration
     create_table :tags do |t|
       t.column :name, :string
     end
-    
+
     create_table :photos_tags, :id => :false do |t|
       t.column :photo_id, :integer
       t.column :tag_id, :integer
